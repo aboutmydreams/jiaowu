@@ -1,7 +1,6 @@
 from PIL import Image
 import numpy as np
 import pandas as pd
-import scipy.misc
 
 
 
@@ -23,11 +22,11 @@ def cut_img(num):
     imgs = [img1, img2, img3, img4]
 
     mode = np.asarray(img5)
-    mode = np.where(mode<120,0,255)
+    mode = np.where(mode < 120, 0, 255)
     print(mode)
     # print(img.format,img.size,img.mode)
     # img1.show()
-    return img2
+    return img1,img2,img3,img4
 
 # ximgs = []
 # i = 0
