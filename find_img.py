@@ -14,9 +14,10 @@ def get_token():
     return res['access_token']
 
 def baidu(base64img):
-    data = {}
-    # data['access_taken'] = res['access_token']
-    data['access_taken'] = '24.3d4e3aad2b1fa147d57c934e4efc0122.2592000.1549177627.282335-11416205'
+    data = {
+        'access_taken': '24.3d4e3aad2b1fa147d57c934e4efc0122.2592000.1549177627.282335-11416205'
+    }
+
     url = 'https://aip.baidubce.com/rest/2.0/ocr/v1/general_basic' + 'user/add?access_token=' + data['access_taken']
     data['image'] = base64img
     headers={
@@ -49,17 +50,14 @@ def imgs(allsave = 0,cookie1=None):
     if allsave == 1:
         t = time.time()
         file_name = str(int(round(t * 1000)))
-        img.save('imgs/{}.png'.format(file_name))
-        file = open('imgs/{}.png'.format(file_name),'rb')
-        image = file.read()
-        img_base64 = base64.b64encode(image)
-        file.close()
+        img.save(f'imgs/{file_name}.png')
+        file = open(f'imgs/{file_name}.png', 'rb')
     else:
         img.save('imgs/1.png')
         file = open('imgs/1.png','rb')
-        image = file.read()
-        img_base64 = base64.b64encode(image)
-        file.close()
+    image = file.read()
+    img_base64 = base64.b64encode(image)
+    file.close()
     return img_base64
 
 
@@ -84,8 +82,7 @@ def get_count_by_counter(l):
     count = Counter(l)
     t2 = time.time()
     print (t2-t1)
-    count_dict = dict(count)
-    return count_dict
+    return dict(count)
 
 n = 0
 answers = []
@@ -97,21 +94,13 @@ while n < 1000:
         n += 1
     except BaseException as e:
         print(e)
-        pass 
-
-
 print(answers)
 
-file0 = open('data.txt','a+')
-file0.write(str(answers))
-file0.close()
-
+with open('data.txt','a+') as file0:
+    file0.write(str(answers))
 cout1 = get_count_by_counter(answers)
-file1 = open('cont1.txt','w')
-file1.write(str(cout1))
-file1.close()
-
+with open('cont1.txt','w') as file1:
+    file1.write(str(cout1))
 cout2 = all_np(answers)
-file2 = open('cont2.txt','w')
-file2.write(str(cout2))
-file2.close()
+with open('cont2.txt','w') as file2:
+    file2.write(str(cout2))
