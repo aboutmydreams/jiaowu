@@ -5,7 +5,7 @@ class ThreadPool(object):
     def __init__(self,maxsize):
         self.maxsize = maxsize
         self._q = queue.Queue(self.maxsize)
-        for i in range(self.maxsize):
+        for _ in range(self.maxsize):
             self._q.put(threading.Thread)
  
     def getThread(self):
@@ -15,7 +15,7 @@ class ThreadPool(object):
         self._q.put(threading.Thread)
  
 def fun(num,p):
-    print('this is thread [%s]'%num)
+    print(f'this is thread [{num}]')
     time.sleep(1)
     p.addThread()
  
